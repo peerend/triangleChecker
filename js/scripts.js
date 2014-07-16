@@ -27,17 +27,6 @@ function triangleTracker(side1, side2, side3){
 
   return [triangle.triangleType(), [triangle.shortSide, triangle.longSide, triangle.hypotenuse]];
 };
-//   else if (shortSide === longSide && longSide === hypotenuse){
-//     triangle = {"equilateral": sortedSides};
-//     console.log(triangle);
-//     return(triangle);
-//   }else if (shortSide === longSide){
-//     triangle = {"isosceles": sortedSides};
-//     return(triangle);
-//   }else
-//     triangle = {"scalene": sortedSides};
-//     return(triangle);
-// };
 
 $(document).ready(function(){
   $("form.user_input").submit(function(event){
@@ -45,14 +34,21 @@ $(document).ready(function(){
      var side2 = parseInt($("#side2").val());
      var side3 = parseInt($("#side3").val());
      var output = triangleTracker(side1, side2, side3);
+    console.log(output[0]);
+    if (output[0] === 'equilateral'){
+      $("#equilateral").append("<li>" + output[1] + "</li>");
+    } else if (output[0] === 'isosceles'){
+        $("#isosceles").append("<li>" + output[1] + "</li>");
+    } else if (output[0] === 'scalene'){
+        $("#scalene").append("<li>" + output[1] + "</li>");
+    } else {
+        alert(output);
+    }
+    $("input#side1").val("");
+    $("input#side2").val("");
+    $("input#side3").val("");
 
-    if (output === "scalene")
-        $("#grammar").text("a")
-    else
-        $("#grammar").text("an")
-
-    $("#classification").text(output);
-    $("#result").show();
+    console.log(output);
     event.preventDefault();
   });
 });
